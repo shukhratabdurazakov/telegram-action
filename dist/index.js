@@ -73,11 +73,11 @@ function run() {
                         commits_obj_list.push(commits_data);
                     }
                     // const message = `${commits_obj_list}  ${ref}  ${repository.name}  ${sender.login}`
-                    const message = `🔄 *New push commit event*
-        *CommitID:* ${commits_obj_list[0][0]}
-        *Message:* ${commits_obj_list[0][2]}
-        *Repo:* ${repository.name}
-        *By:* [${sender.login}](https://github.com/${sender.login})
+                    const message = `New push commit event
+        CommitID: ${commits_obj_list[0][0]}
+        Message: ${commits_obj_list[0][2]}
+        Repo: ${repository.name}
+        By: [${sender.login}](https://github.com/${sender.login})
         [View commit](${commits_obj_list[0][1]})
         `;
                     // const message = `test test`
