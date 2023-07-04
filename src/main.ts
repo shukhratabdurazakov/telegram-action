@@ -23,9 +23,9 @@ export async function run(): Promise<void> {
         const payload = github.context.payload as PushEvent
         const {commits, ref, repository, sender} = payload
 
-        let commits_obj_list: object[] = []
+        let commits_obj_list: any[] = []
         for (let i = 0; i < commits.length; i++) {
-          let commits_data: object = {
+          let commits_data = {
             myids: commits[i].id,
             urls: commits[i].url
           }
@@ -33,7 +33,7 @@ export async function run(): Promise<void> {
         }
         console.log(`i am hereaaa\n`)
 
-        const message = `${commits_obj_list}\n${ref}\n${repository.name}\n${sender.login}\n`
+        const message = `${commits_obj_list[0].myids}\n${ref}\n${repository.name}\n${sender.login}\n`
 
         console.log(message)
         await sendMessage(chatId, message, uri)
