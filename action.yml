@@ -12,5 +12,5 @@ branding:
   icon: 'send'
   color: 'gray-dark'
 runs:
-  using: 'node:lts'
+  using: 'node16'
   main: 'dist/index.js'
