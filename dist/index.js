@@ -62,10 +62,18 @@ function run() {
             switch (case_name) {
                 case 'push': {
                     const payload = github.context.payload;
-                    const { commits, ref, repository, sender, pusher, created } = payload;
-                    const message = `${commits}\n${ref}\n${repository}\n${sender}\n${pusher}\n${created}`;
+                    const { commits, ref, repository, sender, pusher } = payload;
+                    let commits_obj_list = [];
+                    for (let i = 0; i < commits.length; i++) {
+                        let commits_data = {
+                            myids: commits[i].id,
+                            urls: commits[i].url
+                        };
+                        commits_obj_list.push(commits_data);
+                    }
+                    const message = `${commits_obj_list}\n${ref}\n${repository.name}\n${sender.login}\n${pusher.username}`;
                     yield (0, sendMessage_1.default)(chatId, message, uri);
-                    console.log('i am hereaaa');
+                    console.log(`i am hereaaa\n ${message}`);
                     break;
                 }
                 case 'pull_request': {
