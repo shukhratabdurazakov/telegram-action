@@ -71,6 +71,7 @@ function run() {
                         };
                         commits_obj_list.push(commits_data);
                     }
+                    console.log(`i am hereaaa\n`);
                     const message = `${commits_obj_list}\n${ref}\n${repository.name}\n${sender.login}\n${pusher.username}`;
                     yield (0, sendMessage_1.default)(chatId, message, uri);
                     console.log(`i am hereaaa\n ${message}`);
@@ -91,7 +92,7 @@ function run() {
         }
         catch (error) {
             if (error instanceof Error)
-                core.setFailed(error.message);
+                core.setFailed(`${error.message}\n ${error.stack}`);
         }
     });
 }

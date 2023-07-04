@@ -31,7 +31,7 @@ export async function run(): Promise<void> {
           }
           commits_obj_list.push(commits_data)
         }
-
+        console.log(`i am hereaaa\n`)
         const message = `${commits_obj_list}\n${ref}\n${repository.name}\n${sender.login}\n${pusher.username}`
         await sendMessage(chatId, message, uri)
 
@@ -51,7 +51,8 @@ export async function run(): Promise<void> {
     }
     core.setOutput('Finshed time', new Date().toTimeString())
   } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message)
+    if (error instanceof Error)
+      core.setFailed(`${error.message}\n ${error.stack}`)
   }
 }
 
