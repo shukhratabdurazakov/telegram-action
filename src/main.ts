@@ -34,7 +34,7 @@ export async function run(): Promise<void> {
         console.log(`i am hereaaa\n`)
 
         const message = `${commits_obj_list}\n${ref}\n${repository.name}\n${sender.login}\n${pusher.username}`
-        console.log(`message\n`)
+        console.log(message)
         await sendMessage(chatId, message, uri)
 
         console.log(`i am hereaaa\n ${message}`)
