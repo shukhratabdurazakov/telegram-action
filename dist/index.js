@@ -94,7 +94,8 @@ function run() {
         }
         catch (error) {
             if (error instanceof Error)
-                core.setFailed(`${error.message}\n ${error.stack}`);
+                // @ts-expect-error
+                core.setFailed(`${error.message}\n ${error.response.data}`);
         }
     });
 }
