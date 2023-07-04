@@ -63,16 +63,16 @@ function run() {
                 case 'push': {
                     const payload = github.context.payload;
                     const { commits, ref, repository, sender } = payload;
-                    // let commits_obj_list: object[] = []
-                    // for (let i = 0; i < commits.length; i++) {
-                    //   let commits_data: object = {
-                    //     myids: commits[i].id,
-                    //     urls: commits[i].url
-                    //   }
-                    //   commits_obj_list.push(commits_data)
-                    // }
+                    let commits_obj_list = [];
+                    for (let i = 0; i < commits.length; i++) {
+                        let commits_data = {
+                            myids: commits[i].id,
+                            urls: commits[i].url
+                        };
+                        commits_obj_list.push(commits_data);
+                    }
                     console.log(`i am hereaaa\n`);
-                    const message = `\n${ref}\n${repository.name}\n${sender.login}\n`;
+                    const message = `${commits_obj_list}\n${ref}\n${repository.name}\n${sender.login}\n`;
                     console.log(message);
                     yield (0, sendMessage_1.default)(chatId, message, uri);
                     console.log(`i am hereaaa\n ${message}`);
