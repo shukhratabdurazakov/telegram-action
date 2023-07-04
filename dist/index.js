@@ -73,6 +73,7 @@ function run() {
                     }
                     console.log(`i am hereaaa\n`);
                     const message = `${commits_obj_list}\n${ref}\n${repository.name}\n${sender.login}\n${pusher.username}`;
+                    console.log(`message\n`);
                     yield (0, sendMessage_1.default)(chatId, message, uri);
                     console.log(`i am hereaaa\n ${message}`);
                     break;
