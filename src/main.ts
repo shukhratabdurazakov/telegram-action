@@ -56,9 +56,7 @@ export async function run(): Promise<void> {
     }
     core.setOutput('Finshed time', new Date().toTimeString())
   } catch (error) {
-    if (error instanceof Error)
-      // @ts-expect-error
-      core.setFailed(`${error.message}\n ${error.response.data}`)
+    if (error instanceof Error) core.setFailed(`${error.message}`)
   }
 }
 

@@ -95,8 +95,7 @@ function run() {
         }
         catch (error) {
             if (error instanceof Error)
-                // @ts-expect-error
-                core.setFailed(`${error.message}\n ${error.response.data}`);
+                core.setFailed(`${error.message}`);
         }
     });
 }
@@ -171,7 +170,7 @@ const sendMessage = (chatId, message, uri) => {
     return axios_1.default.post(uri, {
         chat_id: chatId,
         text: message,
-        parse_mode: 'Markdownv2'
+        // parse_mode: 'Markdownv2'
     });
 };
 exports["default"] = sendMessage;
