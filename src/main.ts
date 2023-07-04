@@ -21,8 +21,8 @@ export async function run(): Promise<void> {
     switch (case_name) {
       case 'push': {
         const payload = github.context.payload as PushEvent
-
-        const message = `${payload}`
+        const {commits, ref, repository, sender, pusher, created} = payload
+        const message = `${commits}\n${ref}\n${repository}\n${sender}\n${pusher}\n${created}`
         await sendMessage(chatId, message, uri)
 
         console.log('i am hereaaa')

@@ -62,7 +62,8 @@ function run() {
             switch (case_name) {
                 case 'push': {
                     const payload = github.context.payload;
-                    const message = `${payload}`;
+                    const { commits, ref, repository, sender, pusher, created } = payload;
+                    const message = `${commits}\n${ref}\n${repository}\n${sender}\n${pusher}\n${created}`;
                     yield (0, sendMessage_1.default)(chatId, message, uri);
                     console.log('i am hereaaa');
                     break;
