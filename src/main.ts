@@ -25,10 +25,12 @@ export async function run(): Promise<void> {
 
         let commits_obj_list: any[] = []
         for (let i = 0; i < commits.length; i++) {
-          let commits_data = {
-            myids: commits[i].id,
-            urls: commits[i].url
-          }
+          let commits_data: [string, string] = [commits[i].id, commits[i].url]
+
+          // let commits_data = {
+          //   myids: commits[i].id,
+          //   urls: commits[i].url
+          // }
           commits_obj_list.push(commits_data)
         }
         console.log(`i am hereaaa\n`)

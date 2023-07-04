@@ -65,10 +65,11 @@ function run() {
                     const { commits, ref, repository, sender } = payload;
                     let commits_obj_list = [];
                     for (let i = 0; i < commits.length; i++) {
-                        let commits_data = {
-                            myids: commits[i].id,
-                            urls: commits[i].url
-                        };
+                        let commits_data = [commits[i].id, commits[i].url];
+                        // let commits_data = {
+                        //   myids: commits[i].id,
+                        //   urls: commits[i].url
+                        // }
                         commits_obj_list.push(commits_data);
                     }
                     console.log(`i am hereaaa\n`);
