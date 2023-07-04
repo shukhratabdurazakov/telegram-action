@@ -42,26 +42,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.run = void 0;
+/* eslint-disable */
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const sendMessage_1 = __importDefault(__nccwpck_require__(5203));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const botToken = core.getInput("bot_token");
-            const chatId = core.getInput("chat_id");
-            if (github.context.eventName !== "pull_request") {
-                throw new Error("This action only works on pull_request events");
-            }
-            const payload = github.context.payload;
-            if (!botToken || !chatId) {
-                throw new Error("bot_token and chat_id are required");
-            }
+            const botToken = core.getInput('bot_token');
+            const chatId = core.getInput('chat_id');
+            // const botToken = '5068720431:AAHrc4_uv-0bldBIcM0ecVe9nSZT-ENVryU';
+            // const chatId = '-1001233093277';
             const uri = `https://api.telegram.org/bot${botToken}/sendMessage`;
-            const message = formatMessage(payload);
-            yield (0, sendMessage_1.default)(chatId, message, uri);
-            core.debug(`Message sent!`);
-            core.setOutput("Finshed time", new Date().toTimeString());
+            if (!botToken || !chatId) {
+                throw new Error('bot_token and chat_id are required');
+            }
+            let case_name = github.context.eventName;
+            switch (case_name) {
+                case 'push': {
+                    const payload = github.context.payload;
+                    const message = `${payload}`;
+                    yield (0, sendMessage_1.default)(chatId, message, uri);
+                    console.log('i am hereaaa');
+                    break;
+                }
+                case 'pull_request': {
+                    const payload = github.context.payload;
+                    const message = formatMessage(payload);
+                    yield (0, sendMessage_1.default)(chatId, message, uri);
+                    break;
+                }
+                default: {
+                    throw new Error('This action only works on specific events');
+                    break;
+                }
+            }
+            core.setOutput('Finshed time', new Date().toTimeString());
         }
         catch (error) {
             if (error instanceof Error)
@@ -69,27 +86,28 @@ function run() {
         }
     });
 }
+exports.run = run;
 // Format the message based on the event type, new pull or review request.
 const formatMessage = (payload) => {
     const { action, pull_request, repository, sender, number } = payload;
     const { name, owner } = repository;
     const { title } = pull_request;
-    let message = "";
+    let message = '';
     const prTitle = escapeMarkdown(title);
     const ownerName = escapeMarkdown(owner.login);
     const repoName = escapeMarkdown(name);
     const senderName = escapeMarkdown(sender.login);
     switch (action) {
-        case "opened":
+        case 'opened':
             message = `🔄 *Pull Request* \\\#${number}
       On [${ownerName}/${repoName}](https://github.com/${ownerName}/${repoName}/pull/${number})
       *Title:* ${prTitle}
       *By:* [${senderName}](https://github.com/${senderName})
       [View Pull Request](https://github.com/${ownerName}/${repoName}/pull/${number})
       `;
-            console.debug("Message: ", message);
+            console.debug('Message: ', message);
             return message;
-        case "review_requested":
+        case 'review_requested':
             const { requested_reviewer } = payload;
             const { login: reviewer } = requested_reviewer;
             const reviewerName = escapeMarkdown(reviewer);
@@ -100,7 +118,7 @@ const formatMessage = (payload) => {
       *For:* [${reviewerName}](https://github.com/${reviewerName})
       [View Request](https://github.com/${ownerName}/${repoName}/pull/${number})
       `;
-            console.debug("Message: ", message);
+            console.debug('Message: ', message);
             return message;
         default:
             throw new Error(`Unsupported action: ${action}`);
@@ -111,9 +129,9 @@ const formatMessage = (payload) => {
   ignore pre and code entities as we do not use.
 */
 const escapeMarkdown = (text) => {
-    return text.replace(/([_*\[\]()~`>#+-=|{}\.!])/g, "\\$1");
+    return text.replace(/([_*\[\]()~`>#+-=|{}\.!])/g, '\\$1');
 };
-run();
+// run();
 
 
 /***/ }),
@@ -127,6 +145,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+/* eslint-disable*/
 const axios_1 = __importDefault(__nccwpck_require__(6545));
 /**
  * Send a Telegram message on pull request event.
@@ -138,7 +157,7 @@ const sendMessage = (chatId, message, uri) => {
     return axios_1.default.post(uri, {
         chat_id: chatId,
         text: message,
-        parse_mode: "Markdownv2",
+        parse_mode: 'Markdownv2'
     });
 };
 exports["default"] = sendMessage;

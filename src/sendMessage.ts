@@ -1,4 +1,5 @@
-import axios from "axios";
+/* eslint-disable*/
+import axios from 'axios'
 
 /**
  * Send a Telegram message on pull request event.
@@ -6,19 +7,12 @@ import axios from "axios";
  * @param message the message to be sent.
  * @param uri telegram api to send request to.
  */
-const sendMessage = (
-  chatId: string,
-  message: string,
-  uri: string,
-) => {
-  return axios.post(
-    uri,
-    {
-      chat_id: chatId,
-      text: message,
-      parse_mode: "Markdownv2",
-    },
-  );
-};
+const sendMessage = (chatId: string, message: string, uri: string) => {
+  return axios.post(uri, {
+    chat_id: chatId,
+    text: message,
+    parse_mode: 'Markdownv2'
+  })
+}
 
-export default sendMessage;
+export default sendMessage
