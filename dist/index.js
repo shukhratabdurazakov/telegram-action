@@ -77,8 +77,8 @@ function run() {
         CommitID: ${commits_obj_list[0][0]}
         Message: ${commits_obj_list[0][2]}
         Repo: ${repository.name}
-        By: [${sender.login}](https://github.com/${sender.login})
-        [View commit](${commits_obj_list[0][1]})
+        By: https://github.com/${sender.login}
+        View commit: ${commits_obj_list[0][1]}
         `;
                     // const message = `test test`
                     console.log(message);
