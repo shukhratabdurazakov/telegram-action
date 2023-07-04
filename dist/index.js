@@ -58,6 +58,7 @@ function run() {
             if (!botToken || !chatId) {
                 throw new Error('bot_token and chat_id are required');
             }
+            throw new Error('intended error');
             let case_name = github.context.eventName;
             switch (case_name) {
                 case 'push': {
