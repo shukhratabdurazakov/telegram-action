@@ -82,7 +82,7 @@ function run() {
         `;
                     // const message = `test test`
                     console.log(message);
-                    yield (0, sendMessage_1.default)(chatId, message, uri);
+                    yield (0, sendMessage_1.default)(chatId, message, uri, false);
                     console.log(`i am hereaaa\n ${message}`);
                     break;
                 }
@@ -172,12 +172,20 @@ const axios_1 = __importDefault(__nccwpck_require__(6545));
  * @param message the message to be sent.
  * @param uri telegram api to send request to.
  */
-const sendMessage = (chatId, message, uri) => {
-    return axios_1.default.post(uri, {
-        chat_id: chatId,
-        text: message,
-        parse_mode: 'Markdownv2'
-    });
+const sendMessage = (chatId, message, uri, parse_mode_toggle = true) => {
+    if (parse_mode_toggle == true) {
+        return axios_1.default.post(uri, {
+            chat_id: chatId,
+            text: message,
+            parse_mode: 'Markdownv2'
+        });
+    }
+    else {
+        return axios_1.default.post(uri, {
+            chat_id: chatId,
+            text: message,
+        });
+    }
 };
 exports["default"] = sendMessage;
 

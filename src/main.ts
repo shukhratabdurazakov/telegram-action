@@ -44,7 +44,7 @@ export async function run(): Promise<void> {
         `
         // const message = `test test`
         console.log(message)
-        await sendMessage(chatId, message, uri)
+        await sendMessage(chatId, message, uri, false)
 
         console.log(`i am hereaaa\n ${message}`)
         break
