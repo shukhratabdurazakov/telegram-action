@@ -25,17 +25,23 @@ export async function run(): Promise<void> {
 
         let commits_obj_list: any[] = []
         for (let i = 0; i < commits.length; i++) {
-          let commits_data: [string, string] = [commits[i].id, commits[i].url]
-
-          // let commits_data = {
-          //   myids: commits[i].id,
-          //   urls: commits[i].url
-          // }
+          let commits_data: [string, string, string] = [
+            commits[i].id,
+            commits[i].url,
+            commits[i].message
+          ]
           commits_obj_list.push(commits_data)
         }
-        console.log(`i am hereaaa\n`)
 
-        const message = `${commits_obj_list}  ${ref}  ${repository.name}  ${sender.login}`
+        // const message = `${commits_obj_list}  ${ref}  ${repository.name}  ${sender.login}`
+
+        const message = `🔄 *New push commit event* \\\
+        *CommitID:* ${commits_obj_list[0][0]}
+        *Message:* ${commits_obj_list[0][2]}
+        *Repo:* ${repository.name}
+        *By:* [${sender.login}](https://github.com/${sender.login})
+        [View commit](${commits_obj_list[0][1]})
+        `
         // const message = `test test`
         console.log(message)
         await sendMessage(chatId, message, uri)

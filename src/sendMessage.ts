@@ -10,8 +10,8 @@ import axios from 'axios'
 const sendMessage = (chatId: string, message: string, uri: string) => {
   return axios.post(uri, {
     chat_id: chatId,
-    text: message
-    // parse_mode: 'Markdownv2'
+    text: message,
+    parse_mode: 'Markdownv2'
   })
 }
 

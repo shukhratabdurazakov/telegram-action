@@ -65,15 +65,21 @@ function run() {
                     const { commits, ref, repository, sender } = payload;
                     let commits_obj_list = [];
                     for (let i = 0; i < commits.length; i++) {
-                        let commits_data = [commits[i].id, commits[i].url];
-                        // let commits_data = {
-                        //   myids: commits[i].id,
-                        //   urls: commits[i].url
-                        // }
+                        let commits_data = [
+                            commits[i].id,
+                            commits[i].url,
+                            commits[i].message
+                        ];
                         commits_obj_list.push(commits_data);
                     }
-                    console.log(`i am hereaaa\n`);
-                    const message = `${commits_obj_list}  ${ref}  ${repository.name}  ${sender.login}`;
+                    // const message = `${commits_obj_list}  ${ref}  ${repository.name}  ${sender.login}`
+                    const message = `🔄 *New push commit event* \\\
+        *CommitID:* ${commits_obj_list[0][0]}
+        *Message:* ${commits_obj_list[0][2]}
+        *Repo:* ${repository.name}
+        *By:* [${sender.login}](https://github.com/${sender.login})
+        [View commit](${commits_obj_list[0][1]})
+        `;
                     // const message = `test test`
                     console.log(message);
                     yield (0, sendMessage_1.default)(chatId, message, uri);
@@ -170,7 +176,7 @@ const sendMessage = (chatId, message, uri) => {
     return axios_1.default.post(uri, {
         chat_id: chatId,
         text: message,
-        // parse_mode: 'Markdownv2'
+        parse_mode: 'Markdownv2'
     });
 };
 exports["default"] = sendMessage;
