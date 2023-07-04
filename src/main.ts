@@ -36,11 +36,11 @@ export async function run(): Promise<void> {
         // const message = `${commits_obj_list}  ${ref}  ${repository.name}  ${sender.login}`
 
         const message = `New push commit event
-        CommitID: ${commits_obj_list[0][0]}
-        Message: ${commits_obj_list[0][2]}
-        Repo: ${repository.name}
-        By: https://github.com/${sender.login}
-        View commit: ${commits_obj_list[0][1]}
+        CommitID: ${escapeMarkdown(commits_obj_list[0][0])}
+        Message: ${escapeMarkdown(commits_obj_list[0][2])}
+        Repo: ${escapeMarkdown(repository.name)}
+        By: https://github.com/${escapeMarkdown(sender.login)}
+        View commit: ${escapeMarkdown(commits_obj_list[0][1])}
         `
         // const message = `test test`
         console.log(message)
