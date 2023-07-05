@@ -42,11 +42,12 @@ export async function run(): Promise<void> {
         break
       }
       default: {
-        throw new Error('This action only works on specific events')
+        throw new Error(
+          'This action only works on specific events such as PR and Push'
+        )
         break
       }
     }
-    core.setOutput('Finshed time', new Date().toTimeString())
   } catch (error) {
     if (error instanceof Error) core.setFailed(`${error.message}`)
   }
