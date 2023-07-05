@@ -1,26 +1,25 @@
-# Telegram Pull Request Notifcation
+# Telegram Events Notifcation
 ---
 A simple Github action that sends a Telegram message when:
 1. Pull request open
 2. Pull request review requested
+3. New push commit event
 ---
-## Usage
-To use this action you need setup your workflow to trigger on pull request events with the following types.
-1. opened 
-2. review_requested
-
 #### Example 
 
 ```yml 
 on:
   pull_request:
     types: [opened, review_requested]
+  push:
+    branches:
+      - main
 ```
 <br/>
 You can include this action in your workflow as follow
 
 ```yml
-- name: Pull Request Telegram
+- name: Send events to telegram
   uses: F2had/pr-telegram-action@v1.0.0
   with: 
     bot_token: '${{ secrets.BotToken }}' # Your bot token from github secrets
@@ -39,20 +38,3 @@ or refer to [this](https://core.telegram.org/bots#3-how-do-i-create-a-bot) on ho
 
 ### Full workflow example.
 [workflow-example.yml](https://github.com/F2had/pr-telegram-action/blob/master/workflow-example.yml).
-
----
-### Action output: 
-
-1. Pull Request Open
-<img width="415" alt="image" src="https://user-images.githubusercontent.com/42780409/163938002-ee566972-16d7-4be2-a745-603300c84c3a.png">
-
-
-2. Review Request
-<img width="326" alt="image" src="https://user-images.githubusercontent.com/42780409/163938110-7e5287f5-5e2b-42e3-b1f4-57583051ac8b.png">
-
-
----
-
-### Notes
-When a review is requested this action will run for every reviewer.
-
