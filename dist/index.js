@@ -52,8 +52,6 @@ function run() {
         try {
             const botToken = core.getInput('bot_token');
             const chatId = core.getInput('chat_id');
-            // const botToken = '5068720431:AAHrc4_uv-0bldBIcM0ecVe9nSZT-ENVryU';
-            // const chatId = '-1001233093277';
             const uri = `https://api.telegram.org/bot${botToken}/sendMessage`;
             if (!botToken || !chatId) {
                 throw new Error('bot_token and chat_id are required');
@@ -72,18 +70,8 @@ function run() {
                         ];
                         commits_obj_list.push(commits_data);
                     }
-                    // const message = `${commits_obj_list}  ${ref}  ${repository.name}  ${sender.login}`
-                    const message = `New push commit event
-        CommitID: ${commits_obj_list[0][0]}
-        Message: ${commits_obj_list[0][2]}
-        Repo: ${repository.name}
-        By: https://github.com/${sender.login}
-        View commit: ${commits_obj_list[0][1]}
-        `;
-                    // const message = `test test`
-                    console.log(message);
+                    const message = `New push commit event\nCommitID: ${commits_obj_list[0][0]}\nMessage: ${commits_obj_list[0][2]}\nRepo: ${repository.name}\nBy: https://github.com/${sender.login}\nView commit: ${commits_obj_list[0][1]}`;
                     yield (0, sendMessage_1.default)(chatId, message, uri, false);
-                    console.log(`i am hereaaa\n ${message}`);
                     break;
                 }
                 case 'pull_request': {
@@ -183,7 +171,7 @@ const sendMessage = (chatId, message, uri, parse_mode_toggle = true) => {
     else {
         return axios_1.default.post(uri, {
             chat_id: chatId,
-            text: message,
+            text: message
         });
     }
 };
