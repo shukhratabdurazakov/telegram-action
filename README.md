@@ -20,7 +20,7 @@ You can include this action in your workflow as follow
 
 ```yml
 - name: Send events to telegram
-  uses: F2had/pr-telegram-action@v1.0.0
+  uses: shukhratabdurazakov/telegram-action@master
   with: 
     bot_token: '${{ secrets.BotToken }}' # Your bot token from github secrets
     chat_id: '${{ secrets.CHATID }}' # Your chat id from github secrets
